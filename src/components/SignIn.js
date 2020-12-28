@@ -14,17 +14,17 @@ const SignIn = function ({dispatch , user}) {
         console.log(user);
     }, )
     async function handleSubmit() {
-        // const {data} = await axios.post("http://localhost:63342/web-api/src/api/login.php" , {
-        //     email,
-        //     password : pass
-        // })
-        // if(data.status == "ok") {
-        //     console.log(data)
+        const {data} = await axios.post("http://localhost:63342/web-api/src/api/login.php" , {
+            email,
+            password : pass
+        })
+        if(data.status == "ok") {
+            await dispatch(setAuth(data.username))
+            history.push('/')
+        } else {
+            alert('some thing wrong')
 
-        //     history.push('/')
-        // }
-        await dispatch(setAuth("obito"))
-        history.push('/')
+        }
         
     }
     return (

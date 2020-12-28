@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap'
 import CloudDownloadRoundedIcon from '@material-ui/icons/CloudDownloadRounded';
 export default memo(function RulesComponent() {
     return (
-        <div style = {{width : '23%' , marginLeft : 17 , position : 'relative'}} >
+        <div style = {{width : '23%' , marginLeft : 17 , position : 'relative' , backgroundColor : 'rgba(0,0,0,.5)', paddingTop : 15}} >
             <div style = {{position : 'fixed' , width : '20%'}}>
             <div style = {{textAlign : 'center' , marginBottom : 20}}>
                 <Button >

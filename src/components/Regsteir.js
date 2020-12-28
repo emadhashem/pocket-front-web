@@ -9,13 +9,12 @@ export default memo(function Regsteir() {
     const [userName , setuserName] = useState('');
     const [pass , setpass] = useState('')
     async function handleSubmit() {
-        const {data , status} = await axios.post("http://localhost:63342/web-api/src/api/register.php" , {
+        const {Msg , Status} = await axios.post("http://localhost:63342/web-api/src/api/register.php" , {
             username : userName,    
             email,
             password : pass
         })
-        
-       console.log(data);
+       alert(Msg)
     }
     return (
         <div style = {{width : "100%" , display : 'flex' , justifyContent : 'center'}}  >

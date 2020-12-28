@@ -1,20 +1,35 @@
 import { Container } from '@material-ui/core'
-import React, { memo } from 'react'
+import Axios from 'axios'
+import React, { memo, useEffect, useState } from 'react'
 import {Button} from 'react-bootstrap'
+import { connect } from 'react-redux'
 import GameCompenent from './GameCompenent'
-const mockData = [
-    1, 2, 3, 4, 5, 6
-]
-export default memo(function TimeLineCompnent() {
+const mapStateToProps = ({user}) => ({
+    user
+})
+export default connect(mapStateToProps)(function TimeLineCompnent({user , dispatch}) {
+    const [data , setdata] = useState([])
+    useEffect( async () => {
+        const {data , status} = await Axios.get('http://localhost:63342/web-api/src/api/matchHistory.php')
+        if(status == 200) {
+            setdata(data)
+        }
+    } , [])
     return (
-        <div style = {{width : '46%'}}>
+        <div style = {{width : '46%' , backgroundColor : 'rgba(0,0,0,.5)' , borderRadius : 50,
+            height : (data.length < 5) ? 1000 : 'auto'
+        }}>
              <div style = {{width : '100%',}}>
                     <p style = {{textAlign : 'center' ,
                      fontSize : 20, fontWeight : 'bolder'}}>Last Matches</p>
                     <div>
                         {
-                            mockData.map(item => (
-                                <GameCompenent />
+                            data.map(item => (
+                                <GameCompenent winner = {item.winner_uname}
+                                loser = {item.looser_uname}
+                                score1 = {item.winner_score}
+                                score2 = {item.looser_score}
+                                />
                             ))
                         }
                     </div>
